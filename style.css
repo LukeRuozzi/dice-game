@@ -47,7 +47,7 @@ input {
   border: none;
   margin: 0 auto;
   padding: 21.5px 0;
-  width: 180px;
+  max-width: 120px;
   font-size: 20px;
   text-align: center;
 }
@@ -204,5 +204,9 @@ input:focus-visible {
     top: 0;
     left: 0;
     margin-left: 0;
+  }
+
+  input {
+    max-width: 160px;
   }
 }
