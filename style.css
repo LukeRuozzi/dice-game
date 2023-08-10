@@ -37,9 +37,9 @@ h1 {
   font-size: 40px;
 }
 
-h3 {
+.play-info {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 input {
@@ -64,11 +64,19 @@ input:focus-visible {
   font-size: 60px;
   align-self: center;
   color: var(--dice-color);
+  position: absolute;
+  top: 62px;
+  left: 50%;
+  margin-left: -30px;
 }
 
 .board {
+  margin-top: 80px;
   display: flex;
   height: 400px;
+  position: relative;
+
+  gap: 20px;
 }
 
 .btn {
@@ -91,21 +99,26 @@ input:focus-visible {
 }
 
 .controls {
-  margin: 20px 30px 50px 30px;
-  flex-basis: 100px;
+  top: -60px;
+  margin-bottom: 50px;
+  width: 100%;
   flex-shrink: 0;
   display: flex;
-  flex-direction: column;
+  
   justify-content: space-between;
+
+  flex-direction: row;
+  order: 1;
+  position: absolute;
 }
 
 .play-buttons {
   display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
 .player-board {
+  margin-top: 80px;
   background: var(--board-bkg);
   /*border: 3px solid transparent;*/
   flex-basis: 50%;
@@ -127,7 +140,7 @@ input:focus-visible {
 }
 
 .points-board {
-  margin: 30px auto;
+  margin: 10px auto;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -152,4 +165,44 @@ input:focus-visible {
   font-size: 24px;
   text-align: center;
   margin: 10px;
+}
+
+@media (min-width: 500px) {
+  .play-info {
+    margin-bottom: 50px;
+  }
+
+  .board {
+    margin-top: 0;
+  }
+
+  .player-board {
+    margin-top: 0;
+  }
+
+  .controls {
+    margin-bottom: 0;
+    width: auto;
+
+    flex-basis: 100px;
+    margin: 20px 30px 50px 30px;
+    flex-direction: column;
+    position: unset;
+    order: 0;
+  }
+
+  .play-buttons {
+    flex-direction: column;
+  }
+
+  .points-board {
+    margin: 30px auto;
+  }
+
+  .fa-solid {
+    position: unset;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+  }
 }

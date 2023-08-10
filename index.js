@@ -29,7 +29,7 @@ Player.prototype.setName = function (name) {
 };
 
 Player.prototype.getNameToDisplay = function () {
-  return this.name || `Player ${this.id}`;
+  return this.name || `Giocatore ${+this.id +1}`;
 };
 
 Player.prototype.addCurrentPoints = function (points) {
