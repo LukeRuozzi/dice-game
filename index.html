@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <script src="./index.js" defer></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz@10..48&display=swap');
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <h1>Dice Game</h1>
+
+      <h3 class="play-info"></h3>
+
+      <div class="board">
+        <!-- Player 0 Board -->
+        <div class="player-board player-board-active" data-player-id="0">
+          <h2 class="player-title">Player 0</h2>
+          <input type="text" value="" class="player-title-input hidden"/>
+          <div class="points-board">
+            <div class="points">
+              <h4>Total</h4>
+              <p>0</p>
+            </div>
+            <div class="points">
+              <h4>Current</h4>
+              <p>0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+          <button id="newGame" class="btn">New Game</button>
+          <i class="fa-solid fa-dice-one"></i>
+          <div class="play-buttons">
+            <button id="rollDice" class="btn">Roll dice</button>
+            <button id="hold" class="btn">Hold</button>
+          </div>
+        </div>
+
+        <!-- Player 1 Board -->
+        <div class="player-board" data-player-id="1">
+          <h2 class="player-title">Player 1</h2>
+          <input type="text" value="" class="player-title-input hidden"/>
+          <div class="points-board">
+            <div class="points">
+              <h4>Total</h4>
+              <p>0</p>
+            </div>
+            <div class="points">
+              <h4>Current</h4>
+              <p>0</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
