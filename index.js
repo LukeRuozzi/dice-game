@@ -15,7 +15,11 @@ const playerInfo = document.querySelector('.play-info');
 const rollDiceBtn = document.getElementById('rollDice');
 const holdBtn = document.getElementById('hold');
 const newGameBtn = document.getElementById('newGame');
-const diceImg = document.querySelector('.fa-solid');
+const diceImg = document.querySelector('#diceResult');
+const diceLoadImg = document.querySelector('#diceLoad');
+const diceSound = document.getElementById('diceSound');
+const countingSound = document.getElementById('countingSound');
+const winningSound = document.getElementById('winningSound');
 
 function Player(id) {
   this.id = id;
@@ -29,7 +33,7 @@ Player.prototype.setName = function (name) {
 };
 
 Player.prototype.getNameToDisplay = function () {
-  return this.name || `Giocatore ${+this.id +1}`;
+  return this.name || `Giocatore ${+this.id + 1}`;
 };
 
 Player.prototype.addCurrentPoints = function (points) {
@@ -76,11 +80,25 @@ const getWinner = () => {
   return player0.isWinner() ? player0 : player1.isWinner() ? player1 : null;
 };
 
+const wait = (duration) => {
+  return new Promise((resolve) => setTimeout(resolve, duration));
+};
+
+const updateDiceUI = (load) => {
+  if (load) {
+    diceImg.classList.add('hidden');
+    diceLoadImg.classList.add('load');
+  } else {
+    diceImg.classList.remove('hidden');
+    diceLoadImg.classList.remove('load');
+  }
+};
+
 const updateUI = () => {
   const winner = getWinner();
 
   // update player boards
-  playerBoards.forEach((board) => {
+  playerBoards.forEach(async (board) => {
     const isActive = board.dataset.playerId === activePlayer.id;
     // set active board
     if (isActive && !winner) {
@@ -95,16 +113,40 @@ const updateUI = () => {
     board.querySelector('.player-title').innerText = player.getNameToDisplay();
 
     // update player currentPoints
-    board.querySelectorAll('.points')[1].querySelector('p').innerText =
-      player.currentPoints;
+    const currentPointsElm = board
+      .querySelectorAll('.points')[1]
+      .querySelector('p');
+    if (player.currentPoints === 0) {
+      currentPointsElm.innerText = '0';
+    } else {
+      let currentValue1 = +currentPointsElm.innerText;
+      for (let i = currentValue1; i < player.currentPoints; i++) {
+        currentValue1 += 1;
+        await wait(20);
+        currentPointsElm.innerText = currentValue1;
+      }
+    }
 
     // update player totalPoints
-    board.querySelectorAll('.points')[0].querySelector('p').innerText =
-      player.totalPoints;
+    const totalPointsElm = board
+      .querySelectorAll('.points')[0]
+      .querySelector('p');
+
+    if (player.totalPoints === 0) {
+      totalPointsElm.innerText = '0';
+    } else {
+      let currentValue = +totalPointsElm.innerText;
+      for (let j = currentValue; j < player.totalPoints; j++) {
+        currentValue += 1;
+        await wait(30);
+        totalPointsElm.innerText = currentValue;
+      }
+    }
   });
 
   // set playInfo
   if (winner) {
+    winningSound.play();
     playerInfo.textContent = `Ha vinto ${winner.getNameToDisplay()}!`;
   } else {
     playerInfo.textContent = `E' il turno di ${activePlayer.getNameToDisplay()}`;
@@ -132,7 +174,15 @@ const updateUI = () => {
       numString = 'six';
       break;
   }
-  diceImg.className = `fa-solid fa-dice-${numString}`;
+  diceImg.classList.remove(
+    'fa-dice-one',
+    'fa-dice-two',
+    'fa-dice-three',
+    'fa-dice-four',
+    'fa-dice-five',
+    'fa-dice-six'
+  );
+  diceImg.classList.add(`fa-dice-${numString}`);
 
   // disable roll dice button
   if (winner) {
@@ -149,11 +199,14 @@ const updateUI = () => {
   }
 };
 
-const rollDice = () => {
+const rollDice = async () => {
   const winner = getWinner();
   if (winner) {
     return;
   }
+
+  updateDiceUI(true);
+  diceSound.play();
 
   //const number = Math.floor(Math.random() * 6) + 1;
 
@@ -162,6 +215,12 @@ const rollDice = () => {
   const number = (array[0] % 6) + 1;
 
   diceNumber = number;
+
+  console.log('number', diceNumber);
+
+  await wait(400);
+
+  updateDiceUI(false);
 
   if (diceNumber === 1) {
     activePlayer.resetCurrentPoints();
@@ -180,6 +239,8 @@ const hold = () => {
   activePlayer.addTotalPoints(activePlayer.currentPoints);
   diceNumber = -1;
   switchPlayer();
+  countingSound.play();
+  setTimeout(() => countingSound.pause(), 500);
   updateUI();
 };
 

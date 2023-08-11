@@ -15,6 +15,21 @@
     </style>
   </head>
   <body>
+    <audio
+      id="winningSound"
+      src="https://soundspunos.com/uploads/files/2023-04/1682166752_1569139566_d65c017f4c1ee63.mp3"
+    ></audio>
+
+    <audio
+      id="countingSound"
+      src="https://soundspunos.com/uploads/files/2022-10/1666904008_1580202595_088ab034258c304.mp3"
+    ></audio>
+
+    <audio
+      id="diceSound"
+      src="https://soundspunos.com/uploads/files/2023-03/1678564986_1563886957_f4717fd7dcf4bec.mp3"
+    ></audio>
+
     <div class="main-container">
       <h1>Dice Game</h1>
 
@@ -40,7 +55,8 @@
         <!-- Controls -->
         <div class="controls">
           <button id="newGame" class="btn">Ricomincia</button>
-          <i class="fa-solid fa-dice-one"></i>
+          <i id="diceResult" class="fa-solid fa-dice-one"></i>
+          <i id="diceLoad" class="fa-solid fa-dice-d6"></i>
           <div class="play-buttons">
             <button id="rollDice" class="btn">Lancia il dado</button>
             <button id="hold" class="btn">Prendi</button>

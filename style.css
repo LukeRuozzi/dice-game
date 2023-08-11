@@ -70,6 +70,21 @@ input:focus-visible {
   margin-left: -30px;
 }
 
+#diceResult {
+  padding-top: 52px;
+}
+
+#diceLoad {
+  transition: transform linear 0.3s;
+  transform: rotateZ(120deg);
+  opacity: 0;
+}
+
+.load {
+  opacity: 1 !important;
+  transform: unset !important;
+}
+
 .board {
   margin-top: 80px;
   display: flex;
@@ -104,7 +119,7 @@ input:focus-visible {
   width: 100%;
   flex-shrink: 0;
   display: flex;
-  
+
   justify-content: space-between;
 
   flex-direction: row;
