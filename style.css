@@ -70,10 +70,6 @@ input:focus-visible {
   margin-left: -30px;
 }
 
-#diceResult {
-  padding-top: 52px;
-}
-
 #diceLoad {
   transition: transform linear 0.3s;
   transform: rotateZ(120deg);
@@ -224,4 +220,8 @@ input:focus-visible {
   input {
     max-width: 160px;
   }
+
+#diceResult {
+  padding-top: 52px;
+}
 }
